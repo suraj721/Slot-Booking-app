@@ -23,12 +23,6 @@ router.post('/:id/book', protect, async (req, res) => {
             return res.status(400).json({ message: 'You have already booked this slot' });
         }
 
-        // Check if user booked another slot on the same day
-        // This requires finding all bookings for the user and checking the slot date
-        // For simplicity, let's assume we just check if they have a booking for this specific slot ID for now, 
-        // or we can fetch the slot details for all user bookings.
-        // Requirement: "one slot per user per day"
-
         const userBookings = await Booking.find({ userId, status: 'confirmed' }).populate('slotId');
         const hasBookingOnSameDay = userBookings.some(booking => booking.slotId.date === slot.date);
 
