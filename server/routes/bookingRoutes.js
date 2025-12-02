@@ -4,7 +4,6 @@ const Slot = require('../models/Slot');
 const { protect, admin } = require('../middleware/authMiddleware');
 const router = express.Router();
 
-// Book a Slot
 router.post('/:id/book', protect, async (req, res) => {
     const slotId = req.params.id;
     const userId = req.user._id;
@@ -17,7 +16,6 @@ router.post('/:id/book', protect, async (req, res) => {
             return res.status(400).json({ message: 'Slot is full' });
         }
 
-        // Check if user already booked this slot
         const existingBooking = await Booking.findOne({ userId, slotId, status: 'confirmed' });
         if (existingBooking) {
             return res.status(400).json({ message: 'You have already booked this slot' });
