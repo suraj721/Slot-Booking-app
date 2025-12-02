@@ -8,13 +8,22 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: '*', // Allow all origins for now to fix CORS issues
+    credentials: true
+}));
 app.use(express.json());
 
 // Database Connection
+console.log('Attempting to connect to MongoDB...');
+console.log('MONGO_URI defined:', !!process.env.MONGO_URI); // Log true/false, not the actual secret
+
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('MongoDB Connected'))
-    .catch(err => console.error('MongoDB Connection Error:', err));
+    .catch(err => {
+        console.error('MongoDB Connection Error:', err);
+        console.error('MONGO_URI value:', process.env.MONGO_URI); // Only for debugging, remove later if sensitive
+    });
 
 // Routes
 const authRoutes = require('./routes/authRoutes');
