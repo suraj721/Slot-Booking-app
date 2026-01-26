@@ -37,10 +37,10 @@ const Navbar = () => {
                 <div className="flex items-center gap-4 pl-4 border-l border-slate-200">
                   <div className="flex items-center gap-2 text-slate-700">
                     <FaUserCircle className="text-2xl text-slate-400" />
-                    <span className="font-medium">{user.name}</span>
+                    <span className="font-medium">{user?.name}</span>
                   </div>
-                  <button 
-                    onClick={handleLogout} 
+                  <button
+                    onClick={handleLogout}
                     className="text-sm font-medium text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 px-4 py-2 rounded-full transition-colors"
                   >
                     Logout
@@ -79,10 +79,10 @@ const Navbar = () => {
               <div className="pt-4 mt-4 border-t border-slate-100">
                 <div className="flex items-center gap-3 px-3 mb-3">
                   <FaUserCircle className="text-2xl text-slate-400" />
-                  <span className="font-medium text-slate-700">{user.name}</span>
+                  <span className="font-medium text-slate-700">{user?.name}</span>
                 </div>
-                <button 
-                  onClick={() => { handleLogout(); setIsOpen(false); }} 
+                <button
+                  onClick={() => { handleLogout(); setIsOpen(false); }}
                   className="w-full text-left px-3 py-2 text-red-600 font-medium hover:bg-red-50 rounded-md"
                 >
                   Logout
